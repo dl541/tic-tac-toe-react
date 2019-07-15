@@ -52,7 +52,8 @@ class GameGrid extends React.Component {
 }
 
 GameGrid.propTypes = {
-  rowIndex: PropTypes.number.isRequired
+  rowIndex: PropTypes.number.isRequired,
+  colIndex: PropTypes.number.isRequired,
 }
 /*
 AddTodo.propTypes = {
