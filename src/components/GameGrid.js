@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes  from "prop-types";
+import PropTypes from "prop-types";
 
 const GridState = {
   CROSS: "X",
@@ -9,7 +9,7 @@ const GridState = {
 
 class GameGrid extends React.Component {
   state = { gridState: GridState.UNOCCUPIED };
-/* 
+  /* 
   onSubmit = (e) =>{
       e.preventDefault();
       this.props.addTodo(this.state.title);
@@ -18,16 +18,18 @@ class GameGrid extends React.Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   */
 
-  onClick = e =>{
-    this.setState({gridState: GridState.CROSS})
-    console.log(`Row ${this.props.rowIndex} is clicked`)
-  }
+  onClick = e => {
+    this.props.socket.emit("change grid state", {
+      rowIndex: this.props.rowIndex,
+      colIndex: this.props.colIndex,
+      symbol: GridState.CROSS
+    });
+    this.setState({ gridState: GridState.CROSS });
+    console.log(`Row ${this.props.rowIndex} is clicked`);
+  };
   render() {
-
     return (
-      <p onClick={this.onClick}>
-        {this.state.gridState}
-      </p>
+      <p onClick={this.onClick}>{this.state.gridState}</p>
 
       /*
       <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
@@ -54,7 +56,8 @@ class GameGrid extends React.Component {
 GameGrid.propTypes = {
   rowIndex: PropTypes.number.isRequired,
   colIndex: PropTypes.number.isRequired,
-}
+  socket: PropTypes.object.isRequired
+};
 /*
 AddTodo.propTypes = {
     addTodo:PropTypes.func.isRequired

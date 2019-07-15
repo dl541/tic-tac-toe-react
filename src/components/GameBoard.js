@@ -8,7 +8,7 @@ class GameBoard extends React.Component {
   generateGrids() {
     return [...Array(3).keys()].map(rowIndex => {
       return [...Array(3).keys()].map(colIndex => (
-        <GameGrid rowIndex={rowIndex} colIndex={colIndex} />
+        <GameGrid rowIndex={rowIndex} colIndex={colIndex} socket={this.props.socket} />
       ));
     });
   }
@@ -32,6 +32,10 @@ class GameBoard extends React.Component {
   }
 }
 
+
+GameBoard.propTypes = {
+  socket:PropTypes.object.isRequired
+}
 /*
 AddTodo.propTypes = {
     addTodo:PropTypes.func.isRequired
