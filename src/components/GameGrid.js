@@ -8,7 +8,7 @@ const GridState = {
 };
 
 class GameGrid extends React.Component {
-  state = { gridState: GridState.UNOCCUPIED };
+
   /* 
   onSubmit = (e) =>{
       e.preventDefault();
@@ -24,12 +24,14 @@ class GameGrid extends React.Component {
       colIndex: this.props.colIndex,
       symbol: GridState.CROSS
     });
-    this.setState({ gridState: GridState.CROSS });
-    console.log(`Row ${this.props.rowIndex} is clicked`);
+    console.log(
+      `Row: ${this.props.rowIndex} Col: ${this.props.colIndex} is clicked`
+    );
   };
+
   render() {
     return (
-      <p onClick={this.onClick}>{this.state.gridState}</p>
+      <p onClick={this.onClick}>{this.props.gridState}</p>
 
       /*
       <form onSubmit={this.onSubmit} style={{ display: "flex" }}>
@@ -56,11 +58,15 @@ class GameGrid extends React.Component {
 GameGrid.propTypes = {
   rowIndex: PropTypes.number.isRequired,
   colIndex: PropTypes.number.isRequired,
-  socket: PropTypes.object.isRequired
+  socket: PropTypes.object.isRequired,
+  gridState: PropTypes.string.isRequired
 };
 /*
 AddTodo.propTypes = {
     addTodo:PropTypes.func.isRequired
 }
 */
-export default GameGrid;
+export {
+  GameGrid,
+  GridState
+}
